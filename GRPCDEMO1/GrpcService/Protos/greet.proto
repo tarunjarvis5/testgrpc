@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService";
+
+package greet;
+
+
+service MyService {
+  rpc Connect (stream Message) returns (stream Message);
+  rpc RegisterClient (ClientInfo) returns (ClientId) {}
+  rpc SendMessage (Message) returns (Empty) {}
+  rpc ConnectServer (stream Message) returns (stream MessageResponse) {}
+}
+
+message ClientInfo {
+  string name = 1;
+  string address = 2;
+}
+
+message ClientId {
+  string id = 1;
+}
+
+message Message {
+  string client_id = 1;
+  string message = 2;
+}
+
+message MessageResponse {
+  string message = 1;
+}
+
+message Empty {}
